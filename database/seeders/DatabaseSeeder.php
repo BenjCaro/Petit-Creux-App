@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Category;
+use App\Models\Ingredient;
+use App\Models\Recipe;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +16,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
+        
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        
+        $categories = Category::factory()->count(5)->create();
+
+        Recipe::factory()
+            ->count(20)
+            ->for($user)
+            ->recycle($categories)
+            ->hasAttached(
+                Ingredient::factory()->count(5),
+                ['quantity' => fake()->numberBetween(1, 100),
+                'unit' => fake()->randomElement(['gr', 'ml'])
+                ]
+            )
+            ->create();
     }
 }
