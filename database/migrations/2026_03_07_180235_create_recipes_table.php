@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug');
+            $table->string('title')->unique();
+            $table->string('slug')->unique();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained();
             $table->boolean('approved')->default(false);
