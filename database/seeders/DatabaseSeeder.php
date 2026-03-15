@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         
-        $categories = Category::factory()->count(5)->create();
+        $categories = Category::all();
 
         Recipe::factory()
             ->count(20)

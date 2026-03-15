@@ -15,13 +15,8 @@ class CategoryFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {   
-        $name = fake()->randomElement(['plats', 'entrées', 'desserts']);
-
-        return [
-            'name' => $name,
-            'slug' => Str::slug($name)
-        ];
+        //
     }
 }
