@@ -25,16 +25,29 @@ class DatabaseSeeder extends Seeder
         
         $categories = Category::all();
 
-        Recipe::factory()
-            ->count(20)
-            ->for($user)
-            ->recycle($categories)
-            ->hasAttached(
-                Ingredient::factory()->count(5),
-                ['quantity' => fake()->numberBetween(1, 100),
-                'unit' => fake()->randomElement(['gr', 'ml'])
-                ]
-            )
-            ->create();
+        $recipes = Recipe::factory()
+                ->count(20)
+                ->for($user)
+                ->recycle($categories)
+                ->hasAttached(
+                    Ingredient::factory()->count(5),
+                    ['quantity' => fake()->numberBetween(1, 100),
+                    'unit' => fake()->randomElement(['gr', 'ml'])
+                    ]
+                )
+                ->create();
+
+        foreach ($recipes as $recipe) {
+        
+        $recipe->steps()->create([
+            'step_number' => 1,
+            'content' => 'Première étape pour ' . $recipe->title,
+        ]);
+
+        
+        $recipe->steps()->create([
+            'step_number' => 2,
+            'content' => 'Deuxième étape pour ' . $recipe->title,
+        ]);
     }
-}
+}}

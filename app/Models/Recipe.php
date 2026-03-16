@@ -22,7 +22,8 @@ class Recipe extends Model
         'duration',
     ];
 
-   
+    protected $with= ['category', 'user'];
+
     protected function casts(): array 
     {
         return [
