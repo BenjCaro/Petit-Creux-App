@@ -57,4 +57,9 @@ class Recipe extends Model
         return $this->belongsToMany(User::class, 'favoris');
     }
 
+    public function steps(): HasMany
+    {
+        return $this->hasMany(Step::class);
+    }
+
 }

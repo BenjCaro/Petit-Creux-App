@@ -15,13 +15,6 @@ class RecipeSeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory()
-        ->count(3)
-        ->has(
-            Recipe::factory()
-                ->count(3)
-                ->hasAttached(Ingredient::factory()->count(5), ['quantity' => 100]) // ajouter 'unit' 
-        )
-        ->create();
+       //
     }
 }
