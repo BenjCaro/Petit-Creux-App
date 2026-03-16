@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\IngredientRecipe;
 
 class Recipe extends Model
 {
@@ -41,7 +42,9 @@ class Recipe extends Model
     
     public function ingredients() :BelongsToMany
     {
-        return $this->belongsToMany(Ingredient::class)->withPivot(['quantity', 'unit']);
+        return $this->belongsToMany(Ingredient::class)
+        ->using(IngredientRecipe::class)
+        ->withPivot(['quantity', 'unit']);
     }
 
     public function posts() :HasMany
