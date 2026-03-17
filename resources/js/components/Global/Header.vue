@@ -1,26 +1,39 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+
 const linkMenu = [
-    'Categorie',
-    'Recettes',
-    'Connexion'
-];
+    {
+        name: 'Categories',
+        url : '/categories'
+    },
+    {
+        name: 'A propos',
+        url : '/about'
+    },
+    {
+        name: 'Connexion',
+        url : '/login'
+    },
+
+]
 
 </script>
 
 <template>
 
     <header>
-        <nav>
+        <nav class="flex justify-between p-3">
             <div>
-                <Link href="">
+                <Link href="/">
                     Logo Petit Creux
                 </Link>
             </div>
-            <ul>
-                <li v-for="link in linkMenu" :key="link">
-                    {{ link }}
-                </li>
+            <ul class="flex gap-3">
+                <Link v-for="link in linkMenu" :key="link" :href="link.url">
+                    <li>
+                        {{ link.name }}
+                    </li>
+                </Link>
             </ul>
         </nav>
     </header>
