@@ -5,7 +5,7 @@
 
 <template>
 
-    <section class="max-w-4xl mx-auto px-4 py-12">
+    <section class="max-w-4xl mx-auto px-4 py-6">
         <form @submit.prevent="submitSearch" class="relative group">
             <div class="flex flex-col md:flex-row items-stretch gap-0 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden focus-within:ring-2 focus-within:ring-orange-500/20 focus-within:border-orange-500 transition-all">
                 
