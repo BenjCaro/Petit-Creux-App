@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import MainLayout from '@/layouts/MainLayout.vue';
+import SearchBar from '@/components/Global/SearchBar.vue';
 
 defineProps<{
   title?: string
@@ -10,10 +11,10 @@ defineProps<{
     
     <MainLayout>
 
-        <h1>
+        <h1 class="text-center p-3">
             {{ title }}
         </h1>
-
+        <SearchBar/>
     </MainLayout>
     
 
