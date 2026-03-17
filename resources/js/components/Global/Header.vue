@@ -21,7 +21,7 @@ const linkMenu = [
 
 <template>
 
-    <header>
+    <header class="bg-emerald-700">
         <nav class="flex justify-between p-3">
             <div>
                 <Link href="/">
