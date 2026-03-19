@@ -14,7 +14,7 @@ const linkMenu = [
 </script>
 
 <template>
-    <header class="bg-emerald-700 text-white relative shadow-md sticky top-0">
+    <header class="bg-emerald-700 text-white relative shadow-md sticky top-0 z-50">
         <nav class="flex justify-between items-center p-4 max-w-7xl mx-auto">
             <Link href="/" class="font-bold text-xl tracking-tight">
                 Petit Creux
