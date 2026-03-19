@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
-// Import des icônes Lucide
 import { Menu, X } from 'lucide-vue-next';
 
 const isMenuOpen = ref(false);

@@ -15,10 +15,10 @@ defineProps<{
 <template>
     
     <MainLayout>
-        <h1 class="text-center text-4xl p-3">
+        <h1 class="text-center font-bold text-4xl p-3">
             {{ title }}
         </h1>
-        <div class="max-w-2xl mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto px-4 py-8 ">
             <p class="text-center text-gray-600 leading-relaxed">
                 <span class="text-xl font-bold text-gray-900 block mb-1">
                     Tu as été porté par un petit creux ?
