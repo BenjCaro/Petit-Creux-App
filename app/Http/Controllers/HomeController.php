@@ -5,16 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
+use App\Models\Recipe;
 
 class HomeController extends Controller
 {
     public function index() 
     {   
-        $categories = Category::select('id', 'name', 'slug')->get();
+        $categoriesWithRecipes = Category::select('id', 'name', 'slug')
+            ->with('recipes:id,category_id,title,slug')
+            ->get();
+            
+        $recipeCount = Recipe::count();
     
         return Inertia::render('Home', [
             'title' => 'Bienvenue sur Petit Creux',
-            'categories' => $categories
+            'categories' => $categoriesWithRecipes,
+            'count' => $recipeCount
         ]);
     }
 }
