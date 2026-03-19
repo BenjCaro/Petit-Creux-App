@@ -3,8 +3,7 @@
 import MainLayout from '@/layouts/MainLayout.vue';
 import SearchBar from '@/components/Global/SearchBar.vue';
 import CategoryMenu from '@/components/Global/CategoryMenu.vue';
-
-
+import CategoryList from '@/components/Global/CategoryList.vue';
 
 defineProps<{
   title?: string,
@@ -38,15 +37,7 @@ defineProps<{
         </div>
         <CategoryMenu :categories="categories"/>
         <SearchBar :count="count"/>  
-        <div v-for="category in categories" :key="category.id"> 
-            <h2 class="font-bold text-2xl mt-4">{{ category.name }}</h2>
-            <div v-for="recipe in category.recipes" :key="recipe.id">
-                <p>🍳 {{ recipe.title }}</p>
-            </div>
-            <p v-if="category.recipes.length === 0" class="text-gray-500 italic">
-                Aucune recette ici pour le moment.
-            </p>
-        </div>
+        <CategoryList :categories="categories"/>
     </MainLayout>
 
 </template>

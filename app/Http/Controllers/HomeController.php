@@ -12,8 +12,12 @@ class HomeController extends Controller
     public function index() 
     {   
         $categoriesWithRecipes = Category::select('id', 'name', 'slug')
-            ->with('recipes:id,category_id,title,slug')
-            ->get();
+        ->with(['recipes' => function ($query) {
+            $query->select('id', 'category_id', 'title', 'slug')
+                ->latest() 
+                ->limit(4); 
+            }])
+        ->get();
             
         $recipeCount = Recipe::count();
     
