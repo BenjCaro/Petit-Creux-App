@@ -8,12 +8,13 @@ import CategoryList from '@/components/Global/CategoryList.vue';
 defineProps<{
   title?: string,
   categories: any[],
-  count: Number
+  count: Number,
+  recipes: any[],
+  search: string
 }>();
 </script>
 
-<template>
-    
+<template> 
     <MainLayout>
         <h1 class="text-center font-bold text-4xl p-3">
             {{ title }}
@@ -36,7 +37,7 @@ defineProps<{
             </p>
         </div>
         <CategoryMenu :categories="categories"/>
-        <SearchBar :count="count"/>  
+        <SearchBar :search='search' :count="count" :recipes="recipes"/>  
         <CategoryList :categories="categories"/>
     </MainLayout>
 
