@@ -9,8 +9,26 @@ use App\Models\Recipe;
 
 class HomeController extends Controller
 {
-    public function index() 
+    public function index(Request $request) 
     {   
+
+        $query = Recipe::query();
+
+        if ($request->filled('search')) {
+
+            $search = $request->input('search');
+            $query->where('title', 'like', "%{$search}%")
+            ->orWhereHas('ingredients', function ($q2) use ($search) {
+              $q2->where('name', 'like', "%{$search}%");
+             });
+            $recipes = $query->get();
+            
+
+        } else {
+           
+            $recipes = [];
+        }
+
         $categoriesWithRecipes = Category::select('id', 'name', 'slug')
         ->with(['recipes' => function ($query) {
             $query->select('id', 'category_id', 'title', 'slug')
@@ -24,7 +42,9 @@ class HomeController extends Controller
         return Inertia::render('Home', [
             'title' => 'Bienvenue sur Petit Creux',
             'categories' => $categoriesWithRecipes,
-            'count' => $recipeCount
+            'count' => $recipeCount,
+            'recipes' => $recipes
         ]);
     }
+
 }
