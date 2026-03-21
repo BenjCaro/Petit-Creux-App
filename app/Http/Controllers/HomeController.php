@@ -13,16 +13,16 @@ class HomeController extends Controller
     {   
 
         $query = Recipe::query();
+        $search = $request->input('search');
 
         if ($request->filled('search')) {
 
-            $search = $request->input('search');
             $query->where('title', 'like', "%{$search}%")
             ->orWhereHas('ingredients', function ($q2) use ($search) {
               $q2->where('name', 'like', "%{$search}%");
              });
             $recipes = $query->get();
-            
+           // dd($recipes);
 
         } else {
            
@@ -43,7 +43,8 @@ class HomeController extends Controller
             'title' => 'Bienvenue sur Petit Creux',
             'categories' => $categoriesWithRecipes,
             'count' => $recipeCount,
-            'recipes' => $recipes
+            'recipes' => $recipes,
+            'search' => $search
         ]);
     }
 
