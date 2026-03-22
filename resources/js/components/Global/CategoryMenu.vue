@@ -1,11 +1,7 @@
 <script setup lang="ts">
 
 import { Link } from '@inertiajs/vue3';
-interface Category {
-    id: number;
-    name: string;
-    slug: string;
-}
+import { Category } from '@/types/recipe';
 
 defineProps<{
   categories: Category[]

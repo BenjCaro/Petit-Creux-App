@@ -1,24 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 
-interface Recipe {
-    id: number;
-    title: string;
-    slug: string;
-    approved: boolean;
-    duration: number;
-    category_id: number;
-    user_id: number;
-    category?: Category;
-}
-
-interface Category {
-    id: number;
-    name: string;
-    slug: string;
-    recipes: Recipe[];
-}
-
+import { Category} from '@/types/recipe';
 defineProps<{
   categories: Category[]
 

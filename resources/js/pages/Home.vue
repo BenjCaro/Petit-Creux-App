@@ -5,35 +5,7 @@ import SearchBar from '@/components/Global/SearchBar.vue';
 import CategoryMenu from '@/components/Global/CategoryMenu.vue';
 import CategoryList from '@/components/Global/CategoryList.vue';
 
-interface Recipe {
-    id: number;
-    title: string;
-    slug: string;
-    approved: boolean;
-    duration: number;
-    category_id: number;
-    user_id: number;
-    category?: Category;
-}
-
-interface Paginator {
-    data: Recipe[]; 
-    current_page: number;
-    last_page: number;
-    links: {
-        url: string | null;
-        label: string;
-        active: boolean;
-    }[];
-    total: number;
-}
-
-interface Category {
-    id: number;
-    name: string;
-    slug: string;
-    recipes: Recipe[];
-}
+import {Category, Paginator } from '@/types/recipe';
 
 defineProps<{
   title?: string,
