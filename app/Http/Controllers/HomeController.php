@@ -12,6 +12,7 @@ class HomeController extends Controller
     public function index(Request $request) 
     {   
 
+        // Search input
         $query = Recipe::query()->where('approved', true);
         $search = $request->input('search');
 
@@ -30,6 +31,7 @@ class HomeController extends Controller
             $recipes = Recipe::whereRaw('1 = 0')->paginate(5); // envoie un objet paginator vide 
         }
 
+        // Show latest recipes by cat
         $categoriesWithRecipes = Category::select('id', 'name', 'slug')
         ->with(['recipes' => function ($query) {
             $query->select('id', 'category_id', 'title', 'slug')
@@ -49,5 +51,4 @@ class HomeController extends Controller
             'search' => $search
         ]);
     }
-
 }
