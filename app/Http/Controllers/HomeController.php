@@ -16,17 +16,18 @@ class HomeController extends Controller
         $search = $request->input('search');
 
         if ($request->filled('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                ->orWhereHas('ingredients', function ($q2) use ($search) {
+                    $q2->where('name', 'like', "%{$search}%");
+                }); 
+            }); 
 
-            $query->where('title', 'like', "%{$search}%")
-            ->orWhereHas('ingredients', function ($q2) use ($search) {
-              $q2->where('name', 'like', "%{$search}%");
-             });
             $recipes = $query->paginate(5)->withQueryString();
-           // dd($recipes);
 
         } else {
-           
-            $recipes = [];
+            
+            $recipes = Recipe::whereRaw('1 = 0')->paginate(5); // envoie un objet paginator vide 
         }
 
         $categoriesWithRecipes = Category::select('id', 'name', 'slug')
