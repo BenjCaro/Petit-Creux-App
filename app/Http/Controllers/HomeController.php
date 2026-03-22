@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index(Request $request) 
     {   
 
-        $query = Recipe::query();
+        $query = Recipe::query()->where('approved', true);
         $search = $request->input('search');
 
         if ($request->filled('search')) {
@@ -21,7 +21,7 @@ class HomeController extends Controller
             ->orWhereHas('ingredients', function ($q2) use ($search) {
               $q2->where('name', 'like', "%{$search}%");
              });
-            $recipes = $query->paginate(5)->withQueryString();;
+            $recipes = $query->paginate(5)->withQueryString();
            // dd($recipes);
 
         } else {
@@ -32,12 +32,13 @@ class HomeController extends Controller
         $categoriesWithRecipes = Category::select('id', 'name', 'slug')
         ->with(['recipes' => function ($query) {
             $query->select('id', 'category_id', 'title', 'slug')
+                ->where('approved', true)
                 ->latest() 
                 ->limit(4); 
             }])
         ->get();
             
-        $recipeCount = Recipe::count();
+        $recipeCount = Recipe::where('approved', true)->count();
     
         return Inertia::render('Home', [
             'title' => 'Bienvenue sur Petit Creux',
