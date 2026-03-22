@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-    <section v-if="recipes.data.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <section v-if="recipes?.data?.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         <div v-for="recipe in recipes.data" :key="recipe.id" 
             class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
             <div class="p-5">
