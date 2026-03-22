@@ -27,8 +27,9 @@ class HomeController extends Controller
             $recipes = $query->paginate(5)->withQueryString();
 
         } else {
-            
-            $recipes = Recipe::whereRaw('1 = 0')->paginate(5); // envoie un objet paginator vide 
+
+            // envoie un objet paginator vide 
+            $recipes = Recipe::whereRaw('1 = 0')->paginate(5);
         }
 
         // Show latest recipes by cat

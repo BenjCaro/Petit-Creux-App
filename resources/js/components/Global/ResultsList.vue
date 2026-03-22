@@ -10,6 +10,12 @@ defineProps<{
 </script>
 
 <template>
+    <div v-if="recipes?.total !== null" class="max-w-7xl mx-auto px-4 mb-4">
+        <p class="text-sm text-gray-500">
+            <span class="font-bold text-gray-900">{{ recipes.total }}</span> 
+            {{ recipes.total > 1 ? 'recettes trouvées' : 'recette trouvée' }}
+        </p>
+    </div>
     <section v-if="recipes?.data?.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         <div v-for="recipe in recipes.data" :key="recipe.id" 
             class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
@@ -27,7 +33,7 @@ defineProps<{
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         {{ recipe.duration }} min
                     </span>
-                    <Link :href="`/recette/${recipe.slug}`" 
+                    <Link :href="`/recettes/${recipe.slug}`" 
                         class="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg text-sm font-semibold hover:bg-emerald-100 transition-colors border border-emerald-100">
                         Voir la recette →
                     </Link>

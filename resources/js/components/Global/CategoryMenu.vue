@@ -19,6 +19,5 @@ defineProps<{
                     {{ category.name }}
                 </Link>
             </div>
-        </section>
-
+    </section>
 </template>
