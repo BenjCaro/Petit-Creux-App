@@ -9,8 +9,8 @@ defineProps<{
   title?: string,
   categories: any[],
   count: Number,
-  recipes: any[],
-  search: string
+  recipes: Object,
+  search: string | null
 }>();
 </script>
 

@@ -3,8 +3,8 @@ import { Form } from '@inertiajs/vue3';
 
 defineProps<{
    count: Number,
-   recipes : any[],
-   search: string
+   recipes : any,
+   search: string | null
 }>();
 </script>
 
@@ -36,7 +36,7 @@ defineProps<{
         </Form>
     </section>
     <section>
-        <div v-for="recipe in recipes">
+        <div v-for="recipe in recipes.data" :key="recipe.id">
             {{ recipe.title }}
         </div>
     </section>
