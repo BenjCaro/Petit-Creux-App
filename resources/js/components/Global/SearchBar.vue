@@ -1,9 +1,31 @@
 <script setup lang="ts">
 import { Form } from '@inertiajs/vue3';
 
+interface Recipe {
+    id: number;
+    title: string;
+    slug: string;
+    approved: boolean;
+    duration: number;
+    category_id: number;
+    user_id: number;
+}
+
+interface Paginator {
+    data: Recipe[]; 
+    current_page: number;
+    last_page: number;
+    links: {
+        url: string | null;
+        label: string;
+        active: boolean;
+    }[];
+    total: number;
+}
+
 defineProps<{
    count: Number,
-   recipes : any,
+   recipes : Paginator,
    search: string | null
 }>();
 </script>
