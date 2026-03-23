@@ -36,9 +36,6 @@ defineProps<{
                     Inscris dans la barre de recherche les plats ou aliments qui te 
                     <span class="underline decoration-orange-300 underline-offset-4">donnent envie</span> !
                 </span>
-                <span class="block mt-2 text-sm text-gray-500 font-medium uppercase tracking-tight">
-                    — Ou bien choisis une catégorie ci-dessous —
-                </span>
             </p>
         </div>
         <CategoryMenu :categories="categories" :filters="filters"/>

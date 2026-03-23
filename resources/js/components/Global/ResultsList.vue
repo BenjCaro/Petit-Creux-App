@@ -52,11 +52,13 @@ defineProps<{
             </p>
         </div>
     </div>
-    <div v-else class="max-w-7xl mx-auto px-4 py-20 text-center">
-        <span class="text-gray-300 text-5xl mb-4 block">🍳</span>
-        <p class="text-gray-400 font-light italic text-lg">
-            Quelle pépite allez-vous dénicher aujourd'hui ?
-        </p>
+    <div v-else class="max-w-2xl mx-auto px-4 py-12 text-center">
+        <p class="text-sm text-gray-400 uppercase tracking-widest mb-6">Suggestions du moment</p>
+        <div class="flex flex-wrap justify-center gap-2">
+            <span class="px-3 py-1 bg-gray-50 text-gray-500 rounded-full border border-gray-100 text-sm italic">#Chocolat</span>
+            <span class="px-3 py-1 bg-gray-50 text-gray-500 rounded-full border border-gray-100 text-sm italic">#RecettesRapides</span>
+            <span class="px-3 py-1 bg-gray-50 text-gray-500 rounded-full border border-gray-100 text-sm italic">#PetitDéjeuner</span>
+        </div>
     </div>
     <div>
         <nav v-if="recipes.links.length > 3" class="flex items-center justify-center space-x-1 mt-8">
