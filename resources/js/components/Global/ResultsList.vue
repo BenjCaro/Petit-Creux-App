@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-    <div v-if="recipes?.total !== null" class="max-w-7xl mx-auto px-4 mb-4">
+    <div v-if="recipes.total > 0" class="max-w-7xl mx-auto px-4 mb-4">
         <p class="text-sm text-gray-500">
             <span class="font-bold text-gray-900">{{ recipes.total }}</span> 
             {{ recipes.total > 1 ? 'recettes trouvées' : 'recette trouvée' }}
@@ -41,6 +41,13 @@ defineProps<{
             </div>
         </div>
     </section> 
+    <div v-else class="max-w-7xl mx-auto px-4 py-16 text-center">
+        <div class="bg-gray-50 rounded-2xl p-8 border-2 border-dashed border-gray-200">
+            <p class="text-gray-500 font-medium">
+                Désolé, aucune recette ne correspond à votre recherche.
+            </p>
+        </div>
+    </div>
     <div>
         <nav v-if="recipes.links.length > 3" class="flex items-center justify-center space-x-1 mt-8">
             <template v-for="(link, label) in recipes.links" :key="label">
