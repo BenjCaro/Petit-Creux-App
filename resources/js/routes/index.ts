@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../wayfinder'
 /**
 * @see \Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::login
  * @see vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.php:47
@@ -288,6 +288,108 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
     
     home.form = homeForm
+/**
+* @see \App\Http\Controllers\RecipeController::recipe
+ * @see app/Http/Controllers/RecipeController.php:11
+ * @route '/recettes/{recipe}'
+ */
+export const recipe = (args: { recipe: string | { slug: string } } | [recipe: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: recipe.url(args, options),
+    method: 'get',
+})
+
+recipe.definition = {
+    methods: ["get","head"],
+    url: '/recettes/{recipe}',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\RecipeController::recipe
+ * @see app/Http/Controllers/RecipeController.php:11
+ * @route '/recettes/{recipe}'
+ */
+recipe.url = (args: { recipe: string | { slug: string } } | [recipe: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { recipe: args }
+    }
+
+            if (typeof args === 'object' && !Array.isArray(args) && 'slug' in args) {
+            args = { recipe: args.slug }
+        }
+    
+    if (Array.isArray(args)) {
+        args = {
+                    recipe: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        recipe: typeof args.recipe === 'object'
+                ? args.recipe.slug
+                : args.recipe,
+                }
+
+    return recipe.definition.url
+            .replace('{recipe}', parsedArgs.recipe.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\RecipeController::recipe
+ * @see app/Http/Controllers/RecipeController.php:11
+ * @route '/recettes/{recipe}'
+ */
+recipe.get = (args: { recipe: string | { slug: string } } | [recipe: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: recipe.url(args, options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\RecipeController::recipe
+ * @see app/Http/Controllers/RecipeController.php:11
+ * @route '/recettes/{recipe}'
+ */
+recipe.head = (args: { recipe: string | { slug: string } } | [recipe: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: recipe.url(args, options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\RecipeController::recipe
+ * @see app/Http/Controllers/RecipeController.php:11
+ * @route '/recettes/{recipe}'
+ */
+    const recipeForm = (args: { recipe: string | { slug: string } } | [recipe: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: recipe.url(args, options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\RecipeController::recipe
+ * @see app/Http/Controllers/RecipeController.php:11
+ * @route '/recettes/{recipe}'
+ */
+        recipeForm.get = (args: { recipe: string | { slug: string } } | [recipe: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: recipe.url(args, options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\RecipeController::recipe
+ * @see app/Http/Controllers/RecipeController.php:11
+ * @route '/recettes/{recipe}'
+ */
+        recipeForm.head = (args: { recipe: string | { slug: string } } | [recipe: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: recipe.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    recipe.form = recipeForm
 /**
 * @see \Inertia\Controller::__invoke
  * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13

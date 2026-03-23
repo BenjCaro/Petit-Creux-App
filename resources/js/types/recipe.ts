@@ -7,6 +7,8 @@ export interface Recipe {
     category_id: number;
     user_id: number;
     category?: Category;
+    ingredients?: Ingredient[];
+    steps?: Step[];
 }
 
 export interface Paginator {
@@ -26,4 +28,20 @@ export interface Category {
     name: string;
     slug: string;
     recipes: Recipe[];
+}
+
+export interface Ingredient {
+    id: number;
+    name: string;
+    type: string;
+    pivot: {
+        quantity: number;
+        unit: string;
+    }
+}
+
+export interface Step {
+    id: number;
+    step_number: number;
+    content: string;
 }
