@@ -12,7 +12,10 @@ defineProps<{
   categories: Category[],
   count: number,
   recipes: Paginator,
-  search: string | null
+  filters: {
+    search: string | null;
+    category: string | null;
+  }
 }>();
 </script>
 
@@ -38,8 +41,8 @@ defineProps<{
                 </span>
             </p>
         </div>
-        <CategoryMenu :categories="categories"/>
-        <SearchBar :search='search' :count="count" :recipes="recipes"/>  
+        <CategoryMenu :categories="categories" :filters="filters"/>
+        <SearchBar :filters='filters' :count="count" :recipes="recipes"/>  
         <CategoryList :categories="categories"/>
     </MainLayout>
 

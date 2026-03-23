@@ -12,24 +12,32 @@ class HomeController extends Controller
     public function index(Request $request) 
     {   
 
-        // Search input
+        /**
+         * Search Input
+         * On construit la requete avec query() qui porte sur le Model Recipe
+         */
         $query = Recipe::query()->where('approved', true);
-        $search = $request->input('search');
-
+         
         if ($request->filled('search')) {
+            $search = $request->input('search');
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
                 ->orWhereHas('ingredients', function ($q2) use ($search) {
                     $q2->where('name', 'like', "%{$search}%");
-                }); 
-            }); 
+                });
+            });
+        }
+       
+        if ($request->filled('category')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('slug', $request->category);
+            });
+        }
 
-            $recipes = $query->paginate(5)->withQueryString();
-
-        } else {
-
-            // envoie un objet paginator vide 
+        if (!$request->filled('search') && !$request->filled('category')) {
             $recipes = Recipe::whereRaw('1 = 0')->paginate(5);
+        } else {
+            $recipes = $query->latest()->paginate(5)->withQueryString();
         }
 
         // Show latest recipes by cat
@@ -49,7 +57,7 @@ class HomeController extends Controller
             'categories' => $categoriesWithRecipes,
             'count' => $recipeCount,
             'recipes' => $recipes,
-            'search' => $search
+            'filters' => $request->only(['search', 'category'])
         ]);
     }
 }

@@ -5,6 +5,10 @@ import {Paginator} from '@/types/recipe';
 
 defineProps<{
    recipes : Paginator,
+   filters: {
+    search: string | null;
+    category: string | null;
+  }
    
 }>();
 </script>
@@ -41,12 +45,18 @@ defineProps<{
             </div>
         </div>
     </section> 
-    <div v-else class="max-w-7xl mx-auto px-4 py-16 text-center">
+    <div v-else-if="filters.search || filters.category" class="max-w-7xl mx-auto px-4 py-16 text-center">
         <div class="bg-gray-50 rounded-2xl p-8 border-2 border-dashed border-gray-200">
             <p class="text-gray-500 font-medium">
                 Désolé, aucune recette ne correspond à votre recherche.
             </p>
         </div>
+    </div>
+    <div v-else class="max-w-7xl mx-auto px-4 py-20 text-center">
+        <span class="text-gray-300 text-5xl mb-4 block">🍳</span>
+        <p class="text-gray-400 font-light italic text-lg">
+            Quelle pépite allez-vous dénicher aujourd'hui ?
+        </p>
     </div>
     <div>
         <nav v-if="recipes.links.length > 3" class="flex items-center justify-center space-x-1 mt-8">

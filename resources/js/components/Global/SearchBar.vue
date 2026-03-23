@@ -4,9 +4,12 @@ import { Paginator } from '@/types/recipe';
 import ResultsList from './ResultsList.vue';
 
 defineProps<{
-   count: Number,
+   count: number,
    recipes : Paginator,
-   search: string | null
+   filters: {
+    search: string | null;
+    category: string | null;
+  }
 }>();
 </script>
 
@@ -19,7 +22,7 @@ defineProps<{
                         type="text" 
                         placeholder="Ex: Tarte aux pommes, noisettes, ..." 
                         name="search" 
-                        :value="search"
+                        :value="filters.search"
                         required
                         class="w-full h-full px-6 py-4 text-gray-800 placeholder-gray-400 bg-transparent focus:outline-none" >
                 </div>
@@ -36,6 +39,6 @@ defineProps<{
             </p>
         </Form>
     </section>
-    <ResultsList :recipes="recipes"/>
+    <ResultsList :filters="filters" :recipes="recipes"/>
     
 </template>
