@@ -23,6 +23,7 @@ class RecipeFactory extends Factory
 
         return [
             'title'       => $title,
+            'description' => fake()->paragraph(),
             'slug'        => Str::slug($title), 
             'user_id'     => User::factory(),
             'category_id' => Category::factory(),

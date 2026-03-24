@@ -1,6 +1,7 @@
 export interface Recipe {
     id: number;
     title: string;
+    description?: string;
     slug: string;
     approved: boolean;
     duration: number;

@@ -14,6 +14,16 @@ defineProps<{
         <h1 class="text-center font-bold text-4xl p-3 font-extrabold text-gray-950 mb-6">
             {{ recipe.title }}
         </h1>
+        <div class="bg-orange-50/50 border-l-4 border-orange-200 p-6 rounded-r-2xl my-8">
+            <p class="text-gray-700 leading-relaxed">
+                <span class="font-bold text-orange-600 uppercase text-xs tracking-widest block mb-2 text-center md:text-left">
+                    Le mot du chef
+                </span>
+                <span class="italic text-lg">
+                    "{{ recipe.description }}"
+                </span>
+            </p>
+        </div>
         <div class="flex items-center justify-center gap-3 mb-3">
             <span class="px-3 py-1 bg-gray-50 text-gray-500 rounded-full border border-gray-100 text-sm italic">{{recipe.category?.name}}</span>
             <Clock :size="18" stroke-width="2.5" class="text-orange-500" />
