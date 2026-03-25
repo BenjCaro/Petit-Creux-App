@@ -8,6 +8,7 @@ defineProps<{
    filters: {
     search: string | null;
     category: string | null;
+    difficulty: number | string | null;
   }
    
 }>();
@@ -45,7 +46,7 @@ defineProps<{
             </div>
         </div>
     </section> 
-    <div v-else-if="filters.search || filters.category" class="max-w-7xl mx-auto px-4 py-16 text-center">
+    <div v-else-if="filters.search || filters.category || filters.difficulty" class="max-w-7xl mx-auto px-4 py-16 text-center">
         <div class="bg-gray-50 rounded-2xl p-8 border-2 border-dashed border-gray-200">
             <p class="text-gray-500 font-medium">
                 Désolé, aucune recette ne correspond à votre recherche.

@@ -15,6 +15,7 @@ defineProps<{
   filters: {
     search: string | null;
     category: string | null;
+    difficulty: string | null;
   }
 }>();
 </script>

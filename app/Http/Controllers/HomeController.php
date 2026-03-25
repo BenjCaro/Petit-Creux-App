@@ -34,7 +34,11 @@ class HomeController extends Controller
             });
         }
 
-        if (!$request->filled('search') && !$request->filled('category')) {
+        if ($request->filled('difficulty')) {
+            $query->where('difficulty', $request->input('difficulty'));
+        }
+
+        if (!$request->filled('search') && !$request->filled('category') && !$request->filled('difficulty'))  {
             $recipes = Recipe::whereRaw('1 = 0')->paginate(5);
         } else {
             $recipes = $query->latest()->paginate(5)->withQueryString();
@@ -57,7 +61,7 @@ class HomeController extends Controller
             'categories' => $categoriesWithRecipes,
             'count' => $recipeCount,
             'recipes' => $recipes,
-            'filters' => $request->only(['search', 'category'])
+            'filters' => $request->only(['search', 'category', 'difficulty'])
         ]);
     }
 }

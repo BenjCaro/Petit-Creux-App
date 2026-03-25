@@ -9,6 +9,7 @@ defineProps<{
    filters: {
     search: string | null;
     category: string | null;
+    difficulty: number | string | null;
   }
 }>();
 </script>
