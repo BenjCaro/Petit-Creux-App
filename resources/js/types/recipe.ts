@@ -2,6 +2,8 @@ export interface Recipe {
     id: number;
     title: string;
     description?: string;
+    difficulty: number;
+    difficulty_label?: string;
     slug: string;
     approved: boolean;
     duration: number;

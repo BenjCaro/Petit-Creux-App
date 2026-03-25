@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Models\IngredientRecipe;
+use App\Enums\RecipeDifficulty;
+
 
 class Recipe extends Model
 {
@@ -17,6 +20,7 @@ class Recipe extends Model
     protected $fillable = [
         'title',
         'description',
+        'difficulty',
         'slug',
         'user_id',
         'category_id',
@@ -25,11 +29,21 @@ class Recipe extends Model
 
     protected $with= ['category'];
 
+    protected $appends = ['difficulty_label'];
+
     protected function casts(): array 
     {
         return [
+            'difficulty' => RecipeDifficulty::class,
             'approved' => 'boolean',
         ];
+    }
+
+    protected function difficultyLabel(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->difficulty?->label(), 
+        );
     }
 
     public function category() :BelongsTo

@@ -18,17 +18,18 @@ class RecipeFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-{
-        $title = fake()->unique()->sentence(3); 
+    {
+            $title = fake()->unique()->sentence(3); 
 
-        return [
-            'title'       => $title,
-            'description' => fake()->paragraph(),
-            'slug'        => Str::slug($title), 
-            'user_id'     => User::factory(),
-            'category_id' => Category::factory(),
-            'approved'    => fake()->boolean(80), 
-            'duration'    => fake()->numberBetween(15, 120),
-        ];
-}
+            return [
+                'title'       => $title,
+                'description' => fake()->paragraph(),
+                'difficulty' => fake()->randomElement(\App\Enums\RecipeDifficulty::cases()),
+                'slug'        => Str::slug($title), 
+                'user_id'     => User::factory(),
+                'category_id' => Category::factory(),
+                'approved'    => fake()->boolean(80), 
+                'duration'    => fake()->numberBetween(15, 120),
+            ];
+    }
 }

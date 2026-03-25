@@ -28,6 +28,7 @@ defineProps<{
             <span class="px-3 py-1 bg-gray-50 text-gray-500 rounded-full border border-gray-100 text-sm italic">{{recipe.category?.name}}</span>
             <Clock :size="18" stroke-width="2.5" class="text-orange-500" />
             <span class="font-bold">{{ recipe.duration }} min</span>
+            <span class="px-2.5 py-0.5 rounded-md font-bold uppercase text-[10px] tracking-wider border">{{ recipe.difficulty_label }}</span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-[300px,1fr] gap-12 items-start">  
             <section class="bg-gray-50 border border-gray-100 rounded-3xl p-8 md:sticky md:top-6 h-fit">
