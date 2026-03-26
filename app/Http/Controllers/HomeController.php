@@ -44,15 +44,20 @@ class HomeController extends Controller
             $recipes = $query->latest()->paginate(5)->withQueryString();
         }
 
-        // Show latest recipes by cat
+        // Show latest approved recipes by cat
         $categoriesWithRecipes = Category::select('id', 'name', 'slug')
-        ->with(['recipes' => function ($query) {
-            $query->select('id', 'category_id', 'title', 'slug', 'difficulty', 'duration')
-                ->where('approved', true)
-                ->latest() 
-                ->limit(4); 
+            ->with(['approvedRecipes' => function ($query) {
+                $query->select(
+                    'id', 
+                    'category_id', 
+                    'title', 
+                    'slug', 
+                    'difficulty', 
+                    'duration'
+                )
+                ->latest();
             }])
-        ->get();
+            ->get();
             
         $recipeCount = Recipe::where('approved', true)->count();
     

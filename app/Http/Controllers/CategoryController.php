@@ -8,11 +8,11 @@ class CategoryController extends Controller
 {
     public function index() 
     {
-         $categoriesWithRecipes = Category::select('id', 'name', 'slug') // L'ID ici est vital
+         $categoriesWithRecipes = Category::select('id', 'name', 'slug')
             ->with(['approvedRecipes' => function ($query) {
                 $query->select(
                     'id', 
-                    'category_id', // <--- S'il manque, approvedRecipes sera toujours vide []
+                    'category_id',
                     'title', 
                     'slug', 
                     'difficulty', 
