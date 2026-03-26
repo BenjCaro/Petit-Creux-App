@@ -48,3 +48,8 @@ export interface Step {
     step_number: number;
     content: string;
 }
+
+export interface DifficultyLevel {
+  value: number;
+  label: string;
+}

@@ -2,9 +2,7 @@
 
 import MainLayout from '@/layouts/MainLayout.vue';
 import SearchBar from '@/components/Global/SearchBar.vue';
-import CategoryMenu from '@/components/Global/CategoryMenu.vue';
 import CategoryList from '@/components/Global/CategoryList.vue';
-
 import {Category, Paginator } from '@/types/recipe';
 
 defineProps<{
@@ -39,8 +37,7 @@ defineProps<{
                 </span>
             </p>
         </div>
-        <CategoryMenu :categories="categories" :filters="filters"/>
-        <SearchBar :filters='filters' :count="count" :recipes="recipes"/>  
+        <SearchBar :filters='filters' :count="count" :recipes="recipes" :categories="categories"/>  
         <CategoryList :categories="categories"/>
     </MainLayout>
 

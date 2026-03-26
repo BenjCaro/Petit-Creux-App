@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { Category } from '@/types/recipe';
+import { Category, DifficultyLevel } from '@/types/recipe';
 import { usePage } from '@inertiajs/vue3';
 
 const difficulties = usePage().props.recipe_difficulty_levels as DifficultyLevel[];;
-
-interface DifficultyLevel {
-  value: number;
-  label: string;
-}
 
 defineProps<{
   categories: Category[],
