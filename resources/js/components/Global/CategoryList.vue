@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import { Category} from '@/types/recipe';
+import { ChefHat, Clock } from 'lucide-vue-next';
 
 defineProps<{
   categories: Category[]
@@ -39,18 +40,18 @@ defineProps<{
                         <h3 class="text-sm font-bold text-gray-800 group-hover:text-orange-600 transition-colors truncate leading-snug">
                             {{ recipe.title }}
                         </h3>
-                        <div class="flex items-center gap-3 mt-2">  
-                            <div class="flex items-center text-[11px] text-gray-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                {{ recipe.duration }} min
+                        <div class="flex flex-col gap-1.5 mt-3">
+                            <div class="flex items-center gap-2 text-[11px] text-gray-500">
+                                <div class="w-4 flex-shrink-0 flex justify-center">
+                                    <Clock :size="14" stroke-width="2.5" class="text-gray-400" />
+                                </div>
+                                <span class="font-medium">{{ recipe.duration }} min</span>
                             </div>
-                            <div class="flex items-center text-[11px] text-gray-500 border-l border-gray-200 pl-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                                {{ recipe.difficulty_label }}
+                            <div class="flex items-center gap-2 text-[11px] text-gray-500">
+                                <div class="w-4 flex-shrink-0 flex justify-center">
+                                    <ChefHat :size="14" stroke-width="2.5" class="text-gray-400"/>
+                                </div>
+                                <span class="truncate font-medium">{{ recipe.difficulty_label }}</span>
                             </div>
                         </div>
                     </div>
