@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { Category} from '@/types/recipe';
-import { ChefHat, Clock } from 'lucide-vue-next';
-import Categories from '@/pages/Categories.vue';
+import { Category} from '@/types/recipe'; 
 import RecipeCard from './RecipeCard.vue';
 
 defineProps<{

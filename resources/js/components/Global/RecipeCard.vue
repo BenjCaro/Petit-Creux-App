@@ -1,11 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import { Clock, ChefHat } from 'lucide-vue-next';
+import { Recipe } from '@/types/recipe';
 
-defineProps({
-    recipe: Object,
-    categoryName: String
-});
+defineProps<{
+    recipe: Recipe;
+    categoryName: string;
+}>();
 </script>
 
 <template>
