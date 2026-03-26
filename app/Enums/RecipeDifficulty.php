@@ -12,7 +12,7 @@ enum RecipeDifficulty :int {
     {
         return match($this) {
             self::easy => 'Facile',
-            self::medium => 'Intermédiaire',
+            self::medium => 'Moyen',
             self::hard => 'Difficile',
         };
     }

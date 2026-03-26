@@ -47,7 +47,7 @@ class HomeController extends Controller
         // Show latest recipes by cat
         $categoriesWithRecipes = Category::select('id', 'name', 'slug')
         ->with(['recipes' => function ($query) {
-            $query->select('id', 'category_id', 'title', 'slug')
+            $query->select('id', 'category_id', 'title', 'slug', 'difficulty', 'duration')
                 ->where('approved', true)
                 ->latest() 
                 ->limit(4); 
