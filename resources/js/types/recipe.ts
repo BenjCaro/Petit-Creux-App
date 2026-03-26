@@ -30,7 +30,7 @@ export interface Category {
     id: number;
     name: string;
     slug: string;
-    recipes: Recipe[];
+    approved_recipes?: Recipe[];
 }
 
 export interface Ingredient {

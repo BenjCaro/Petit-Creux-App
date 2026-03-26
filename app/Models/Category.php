@@ -13,8 +13,13 @@ class Category extends Model
         'slug'
     ];
 
-public function recipes() :HasMany
-{
-    return $this->hasMany(Recipe::class);
-}
+    public function recipes() :HasMany
+    {
+        return $this->hasMany(Recipe::class);
+    }
+
+    public function approvedRecipes() :HasMany
+    {
+        return $this->hasMany(Recipe::class)->where('approved', true);
+    }
 }

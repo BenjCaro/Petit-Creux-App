@@ -2,9 +2,10 @@
 import { Link } from '@inertiajs/vue3';
 import { Category} from '@/types/recipe';
 import { ChefHat, Clock } from 'lucide-vue-next';
+import Categories from '@/pages/Categories.vue';
 
 defineProps<{
-  categories: Category[]
+  categories: Category[];
 
 }>();
 
@@ -25,7 +26,7 @@ defineProps<{
             </div>
             <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 <Link 
-                    v-for="recipe in category.recipes" 
+                    v-for="recipe in category.approved_recipes" 
                     :key="recipe.id"
                     :href="`/recettes/${recipe.slug}`"
                     class="group flex items-center bg-white p-4 rounded-2xl border border-gray-100 shadow-sm hover:border-orange-400 hover:shadow-lg transition-all duration-300 h-full"

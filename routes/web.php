@@ -13,6 +13,8 @@ Route::get('/recettes/{recipe:slug}', [RecipeController::class, 'show'] )->name(
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('category');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
 });

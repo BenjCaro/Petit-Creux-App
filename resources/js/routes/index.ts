@@ -469,6 +469,108 @@ categories.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     categories.form = categoriesForm
 /**
+* @see \App\Http\Controllers\CategoryController::category
+ * @see app/Http/Controllers/CategoryController.php:30
+ * @route '/categories/{category}'
+ */
+export const category = (args: { category: string | { slug: string } } | [category: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: category.url(args, options),
+    method: 'get',
+})
+
+category.definition = {
+    methods: ["get","head"],
+    url: '/categories/{category}',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\CategoryController::category
+ * @see app/Http/Controllers/CategoryController.php:30
+ * @route '/categories/{category}'
+ */
+category.url = (args: { category: string | { slug: string } } | [category: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { category: args }
+    }
+
+            if (typeof args === 'object' && !Array.isArray(args) && 'slug' in args) {
+            args = { category: args.slug }
+        }
+    
+    if (Array.isArray(args)) {
+        args = {
+                    category: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        category: typeof args.category === 'object'
+                ? args.category.slug
+                : args.category,
+                }
+
+    return category.definition.url
+            .replace('{category}', parsedArgs.category.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\CategoryController::category
+ * @see app/Http/Controllers/CategoryController.php:30
+ * @route '/categories/{category}'
+ */
+category.get = (args: { category: string | { slug: string } } | [category: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: category.url(args, options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\CategoryController::category
+ * @see app/Http/Controllers/CategoryController.php:30
+ * @route '/categories/{category}'
+ */
+category.head = (args: { category: string | { slug: string } } | [category: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: category.url(args, options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\CategoryController::category
+ * @see app/Http/Controllers/CategoryController.php:30
+ * @route '/categories/{category}'
+ */
+    const categoryForm = (args: { category: string | { slug: string } } | [category: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: category.url(args, options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\CategoryController::category
+ * @see app/Http/Controllers/CategoryController.php:30
+ * @route '/categories/{category}'
+ */
+        categoryForm.get = (args: { category: string | { slug: string } } | [category: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: category.url(args, options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\CategoryController::category
+ * @see app/Http/Controllers/CategoryController.php:30
+ * @route '/categories/{category}'
+ */
+        categoryForm.head = (args: { category: string | { slug: string } } | [category: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: category.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    category.form = categoryForm
+/**
 * @see \Inertia\Controller::__invoke
  * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
  * @route '/dashboard'
