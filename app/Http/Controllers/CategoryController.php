@@ -19,7 +19,8 @@ class CategoryController extends Controller
                     'difficulty', 
                     'duration'
                 )
-                ->latest();
+                ->latest()
+                ->limit(8);
             }])
             ->get();
             
@@ -30,7 +31,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {   
-        $recipes = $category->approvedRecipes()->paginate(10);
+        $recipes = $category->approvedRecipes()->paginate(12);
         $total = $category->approvedRecipes->count();
 
        //dd($recipes);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
 use App\Models\Recipe;
+use Illuminate\Cache\RateLimiting\Limit;
 
 class HomeController extends Controller
 {
@@ -55,7 +56,8 @@ class HomeController extends Controller
                     'difficulty', 
                     'duration'
                 )
-                ->latest();
+                ->latest()
+                ->limit(8);
             }])
             ->get();
             

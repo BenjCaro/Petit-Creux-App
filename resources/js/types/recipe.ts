@@ -31,6 +31,7 @@ export interface Category {
     name: string;
     slug: string;
     approved_recipes?: Recipe[];
+    approved_recipes_count?: number;
 }
 
 export interface Ingredient {
