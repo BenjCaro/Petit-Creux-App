@@ -30,11 +30,14 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {   
-        $category->load('approvedRecipes');
+        $recipes = $category->approvedRecipes()->paginate(10);
         $total = $category->approvedRecipes->count();
+
+       //dd($recipes);
 
         return Inertia::render('Categorie/Category' , [
             'category' => $category,
+            'recipes' => $recipes,
             'total' => $total
         ]);
     }
