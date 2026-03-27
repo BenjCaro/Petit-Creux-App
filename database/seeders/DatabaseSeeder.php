@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $categories = Category::all();
 
         $recipes = Recipe::factory()
-                ->count(20)
+                ->count(300)
                 ->for($user)
                 ->recycle($categories)
                 ->hasAttached(
