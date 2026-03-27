@@ -6,6 +6,7 @@ import { Category } from '@/types/recipe';
 
 defineProps<{
     category: Category
+    total: number
 }>()
 </script>
 
@@ -13,6 +14,8 @@ defineProps<{
     <MainLayout>
         <h1 class="text-center font-black text-4xl p-8 text-gray-900 tracking-tight">
             {{ category.name }} 
+            <span class="text-orange-500 text-xs"> {{ total }} {{ total > 1 ? 'recettes ' : 'recette' }} </span> 
+            
         </h1>
         <section class="max-w-7xl mx-auto px-4 pb-20">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

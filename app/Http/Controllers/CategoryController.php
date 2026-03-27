@@ -9,6 +9,7 @@ class CategoryController extends Controller
     public function index() 
     {
          $categoriesWithRecipes = Category::select('id', 'name', 'slug')
+            ->withCount('approvedRecipes')
             ->with(['approvedRecipes' => function ($query) {
                 $query->select(
                     'id', 
@@ -30,9 +31,11 @@ class CategoryController extends Controller
     public function show(Category $category)
     {   
         $category->load('approvedRecipes');
+        $total = $category->approvedRecipes->count();
 
         return Inertia::render('Categorie/Category' , [
-            'category' => $category
+            'category' => $category,
+            'total' => $total
         ]);
     }
 }
