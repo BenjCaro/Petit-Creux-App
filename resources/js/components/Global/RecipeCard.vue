@@ -5,7 +5,7 @@ import { Recipe } from '@/types/recipe';
 
 defineProps<{
     recipe: Recipe;
-    categoryName: string;
+    categoryName?: string;
 }>();
 </script>
 
