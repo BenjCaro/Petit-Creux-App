@@ -46,7 +46,7 @@ defineProps<{
         </div>
     </div>
     <div>
-        <nav v-if="recipes.links.length > 3" class="flex items-center justify-center space-x-1 mt-8">
+        <nav v-if="recipes.links.length > 3" class="flex items-center justify-center flex-wrap gap-1 mt-8">
             <template v-for="(link, label) in recipes.links" :key="label">
                 <div v-if="link.url === null" 
                         class="px-4 py-2 text-gray-400 border border-gray-200 rounded-lg text-sm cursor-not-allowed"
