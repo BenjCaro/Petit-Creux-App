@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
+
 import {Paginator} from '@/types/recipe';
 import RecipeCard from './RecipeCard.vue';
+import Pagination from './Pagination.vue';
 
 
 defineProps<{
@@ -45,23 +46,5 @@ defineProps<{
             <span class="px-3 py-1 bg-gray-50 text-gray-500 rounded-full border border-gray-100 text-sm italic">#PetitDéjeuner</span>
         </div>
     </div>
-    <div>
-        <nav v-if="recipes.links.length > 3" class="flex items-center justify-center flex-wrap gap-1 mt-8">
-            <template v-for="(link, label) in recipes.links" :key="label">
-                <div v-if="link.url === null" 
-                        class="px-4 py-2 text-gray-400 border border-gray-200 rounded-lg text-sm cursor-not-allowed"
-                        v-html="link.label">
-                </div>
-                    <Link v-else 
-                        :href="link.url" 
-                        class="px-4 py-2 border rounded-lg text-sm transition-all duration-200"
-                        :class="{ 
-                            'bg-orange-500 text-white border-orange-500 font-bold': link.active, 
-                            'bg-white text-gray-700 border-gray-200 hover:bg-orange-50 hover:border-orange-200': !link.active 
-                        }"
-                        v-html="link.label"
-                        preserve-scroll/>   
-            </template>
-        </nav>
-    </div>
+    <Pagination :items="recipes"/>
 </template>

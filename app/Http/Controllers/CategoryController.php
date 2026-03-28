@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {   
-        $recipes = $category->approvedRecipes()->paginate(12);
+        $recipes = $category->approvedRecipes()->paginate(12)->onEachSide(1);
         $total = $category->approvedRecipes->count();
 
        //dd($recipes);

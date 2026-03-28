@@ -42,7 +42,7 @@ class HomeController extends Controller
         if (!$request->filled('search') && !$request->filled('category') && !$request->filled('difficulty'))  {
             $recipes = Recipe::whereRaw('1 = 0')->paginate(5);
         } else {
-            $recipes = $query->latest()->paginate(5)->withQueryString();
+            $recipes = $query->latest()->paginate(5)->onEachSide(1)->withQueryString();
         }
 
         // Show latest approved recipes by cat
