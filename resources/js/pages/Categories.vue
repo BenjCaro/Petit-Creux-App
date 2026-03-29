@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CategoryList from '@/components/Global/CategoryList.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
-import { Category } from '@/types/recipe';
+import type { Category } from '@/types/recipe';
 
 defineProps<{
     categories: Category[]

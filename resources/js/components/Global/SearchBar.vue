@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { Form } from '@inertiajs/vue3';
-import { Paginator, Category } from '@/types/recipe';
+import type { Paginator, Category } from '@/types/recipe';
 import ResultsList from './ResultsList.vue';
 import SearchFilters from './SearchFilters.vue';
-import { Filter } from 'lucide-vue-next';
+
 
 defineProps<{
    categories: Category[],

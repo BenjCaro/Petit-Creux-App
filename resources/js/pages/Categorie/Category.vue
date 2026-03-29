@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import MainLayout from '@/layouts/MainLayout.vue';
-import RecipeCard from '@/components/Global/RecipeCard.vue';
-import { Category, Paginator } from '@/types/recipe';
 import Pagination from '@/components/Global/Pagination.vue';
+import RecipeCard from '@/components/Global/RecipeCard.vue';
+import MainLayout from '@/layouts/MainLayout.vue';
+import type { Category, Paginator } from '@/types/recipe';
 
 defineProps<{
     category: Category

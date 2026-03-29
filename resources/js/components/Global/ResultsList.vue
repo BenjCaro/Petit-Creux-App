@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import {Paginator} from '@/types/recipe';
-import RecipeCard from './RecipeCard.vue';
+import type {Paginator} from '@/types/recipe';
 import Pagination from './Pagination.vue';
+import RecipeCard from './RecipeCard.vue';
 
 
 defineProps<{

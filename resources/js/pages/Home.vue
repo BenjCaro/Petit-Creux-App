@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-import MainLayout from '@/layouts/MainLayout.vue';
-import SearchBar from '@/components/Global/SearchBar.vue';
 import CategoryList from '@/components/Global/CategoryList.vue';
-import {Category, Paginator } from '@/types/recipe';
+import SearchBar from '@/components/Global/SearchBar.vue';
+import MainLayout from '@/layouts/MainLayout.vue';
+import type {Category, Paginator } from '@/types/recipe';
 
 defineProps<{
   title?: string,

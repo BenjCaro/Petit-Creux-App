@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import MainLayout from '@/layouts/MainLayout.vue';
-import { Recipe } from '@/types/recipe';
 import { Clock, Utensils, CheckCircle2} from 'lucide-vue-next';
+import MainLayout from '@/layouts/MainLayout.vue';
+import type { Recipe } from '@/types/recipe';
 
 defineProps<{
     recipe: Recipe

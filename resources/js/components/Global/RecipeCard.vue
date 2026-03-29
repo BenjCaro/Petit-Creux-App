@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import { Clock, ChefHat } from 'lucide-vue-next';
-import { Recipe } from '@/types/recipe';
+import type { Recipe } from '@/types/recipe';
 
 defineProps<{
     recipe: Recipe;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import {Paginator} from '@/types/recipe';
+import type {Paginator} from '@/types/recipe';
 
 defineProps<{
     items : Paginator
@@ -22,9 +22,10 @@ defineProps<{
                             'bg-orange-500 text-white border-orange-500 font-bold': link.active, 
                             'bg-white text-gray-700 border-gray-200 hover:bg-orange-50 hover:border-orange-200': !link.active 
                     }"
-                    v-html="link.label"
                     preserve-scroll
-                    />   
+                    > 
+                    <span v-html="link.label"></span>
+                </Link>
             </template>
         </nav>
         <nav v-if="items.links.length > 3" class="md:hidden flex items-center justify-between mt-8 px-4 py-3 bg-white border border-gray-100 rounded-xl shadow-sm">
