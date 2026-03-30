@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/vue3';
 import { usePage } from '@inertiajs/vue3';
 import type { Category, DifficultyLevel } from '@/types/recipe';
 
-const difficulties = usePage().props.recipe_difficulty_levels as DifficultyLevel[];;
+const difficulties = usePage().props.recipe_difficulty_levels as DifficultyLevel[];
 
 defineProps<{
   categories: Category[],

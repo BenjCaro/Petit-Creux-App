@@ -3,11 +3,15 @@ import Pagination from '@/components/Global/Pagination.vue';
 import RecipeCard from '@/components/Global/RecipeCard.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
 import type { Category, Paginator } from '@/types/recipe';
+import RecipesFilter from '@/components/Global/RecipesFilter.vue';
 
 defineProps<{
     category: Category
     total: number
     recipes: Paginator
+    filters: {
+    difficulty: number | string | null;
+    }
 }>()
 </script>
 
@@ -24,6 +28,7 @@ defineProps<{
                 </span>
             </h1>
         </div>
+        <RecipesFilter :filters="filters" :category="category"/>
         <section v-if="recipes?.data?.length > 0"  class="max-w-7xl mx-auto px-4 pb-20">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <RecipeCard 
