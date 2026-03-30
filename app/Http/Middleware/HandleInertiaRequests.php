@@ -47,6 +47,10 @@ class HandleInertiaRequests extends Middleware
                     'value' => $status->value,
                     'label' => $status->label(), 
                 ]),
+            'recipe_duration' =>collect(\App\Enums\RecipeDuration::cases())->map(fn($status) => [
+                    'value' => $status->value,
+                    'label' => $status->label(), 
+                ]),
             ];
            
     }

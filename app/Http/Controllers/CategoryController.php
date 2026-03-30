@@ -42,23 +42,22 @@ class CategoryController extends Controller
         }
 
         if ($request->filled('duration')) {
-            $value = $request->input('duration');
+            $value = (int) $request->input('duration');
 
-            switch (true) {
-                case ($value <= 30):
+            switch ($value) {
+                case 30: // short
                     $query->where('duration', '<=', 30);
                     break;
-                    
-                case ($value > 60):
-                    $query->where('duration', '>', 60);
-                    break;
-                    
-                default:
+
+                case 45: // medium
                     $query->whereBetween('duration', [31, 60]);
+                    break;
+
+                case 60: // long
+                    $query->where('duration', '>', 60);
                     break;
             }
         }
-
 
         $recipes = $query->paginate(12)->onEachSide(1)->withQueryString();
         

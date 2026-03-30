@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { usePage } from '@inertiajs/vue3';
-import type { Category, DifficultyLevel } from '@/types/recipe';
+import type { Category, DifficultyLevel, Duration } from '@/types/recipe';
 import { Link } from '@inertiajs/vue3';
 
 
 const difficulties = usePage().props.recipe_difficulty_levels as DifficultyLevel[];
+const durations = usePage().props.recipe_duration as Duration[];
 
-defineProps<{
+const props = defineProps<{
   category: Category  
   filters: {
     difficulty: number | string | null;
@@ -15,8 +16,6 @@ defineProps<{
 }>();
 
 </script>
-
-
 <template>
     <section class="max-w-4xl mx-auto px-4 mt-5 mb-2">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
@@ -43,53 +42,21 @@ defineProps<{
     </section>
     <section class="max-w-4xl mx-auto px-4 mt-2 mb-4">
         <div class="flex flex-wrap gap-3">
-            <Link
-                :href="`/categories/${category.slug}`"
+            <Link v-for="(duration, index) in durations"
+               :key="index"
+               :href="`/categories/${category.slug}`"
                 class="px-4 py-2 border rounded-full text-sm font-medium transition-all shadow-sm"
                 :class="{ 
-                    'border-orange-500 bg-orange-50 text-orange-600 shadow-inner': filters?.duration == 30,
-                    'bg-white border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600': filters?.duration != 30}"
+                    'border-orange-500 bg-orange-50 text-orange-600 shadow-inner': filters.duration == duration.value ,
+                    'bg-white border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600': filters.duration != duration.value}"
                 :data="{
                     ...filters,
-                    duration : 30,
+                    duration: duration.value,
                     
                 }"
                 preserve-scroll
-                >
-
-                -30mns
-            </Link>
-            <Link
-                :href="`/categories/${category.slug}`"
-                class="px-4 py-2 border rounded-full text-sm font-medium transition-all shadow-sm"
-                :class="{ 
-                    'border-orange-500 bg-orange-50 text-orange-600 shadow-inner': filters?.duration == 45,
-                    'bg-white border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600': filters?.duration != 45}"
-                :data="{
-                    ...filters,
-                    duration : 45,
-                    
-                }"
-                preserve-scroll
-                >
-
-                entres 30 et 60mins
-            </Link>
-            <Link
-                :href="`/categories/${category.slug}`"
-                class="px-4 py-2 border rounded-full text-sm font-medium transition-all shadow-sm"
-                :class="{ 
-                    'border-orange-500 bg-orange-50 text-orange-600 shadow-inner': filters?.duration == 61,
-                    'bg-white border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600': filters?.duration != 61}"
-                :data="{
-                    ...filters,
-                    duration : 61,
-                    
-                }"
-                preserve-scroll
-                >
-
-                + 1h
+               >
+                {{ duration.label }}
             </Link>
             <Link 
                 v-if="filters"
