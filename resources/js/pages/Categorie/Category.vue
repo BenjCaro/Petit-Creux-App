@@ -38,10 +38,12 @@ defineProps<{
                     :category-name="category.name"
                 />       
             </div>
-            <div v-if="!category.approved_recipes" class="text-center py-20">
-                <p class="text-gray-400 font-medium text-lg">Aucune recette dans cette catégorie pour le moment 👨‍🍳</p>
-            </div>
             <Pagination :items="recipes"/>
         </section>
+        <div v-else class="text-center py-20">
+            <p class="text-gray-400 font-medium text-lg">
+                {{ filters.difficulty ? 'Aucune recette ne correspond à ce niveau de difficulté.' : 'Aucune recette dans cette catégorie pour le moment.' }}
+            </p>
+        </div>
     </MainLayout>
 </template>
