@@ -41,13 +41,32 @@ class CategoryController extends Controller
             $query->where('difficulty', $request->input('difficulty'));
         }
 
+        if ($request->filled('duration')) {
+            $value = $request->input('duration');
+
+            switch (true) {
+                case ($value <= 30):
+                    $query->where('duration', '<=', 30);
+                    break;
+                    
+                case ($value > 60):
+                    $query->where('duration', '>', 60);
+                    break;
+                    
+                default:
+                    $query->whereBetween('duration', [31, 60]);
+                    break;
+            }
+        }
+
+
         $recipes = $query->paginate(12)->onEachSide(1)->withQueryString();
         
 
         return Inertia::render('Categorie/Category' , [
             'category' => $category,
             'recipes' => $recipes,
-            'filters' => $request->only(['difficulty']),
+            'filters' => $request->only(['difficulty', 'duration']),
             'total'    => $recipes->total()
         ]);
     }

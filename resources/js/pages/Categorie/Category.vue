@@ -11,6 +11,7 @@ defineProps<{
     recipes: Paginator
     filters: {
     difficulty: number | string | null;
+    duration: number | null;
     }
 }>()
 </script>

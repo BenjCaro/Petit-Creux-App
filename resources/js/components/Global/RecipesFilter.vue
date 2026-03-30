@@ -10,6 +10,7 @@ defineProps<{
   category: Category  
   filters: {
     difficulty: number | string | null;
+    duration: number | null;
   }
 }>();
 
@@ -17,9 +18,9 @@ defineProps<{
 
 
 <template>
-    <section class="max-w-4xl mx-auto px-4 mt-5 mb-6">
+    <section class="max-w-4xl mx-auto px-4 mt-5 mb-2">
         <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
-            Filtrer par difficulté
+            Filtrer
         </h2> 
         <div class="flex flex-wrap gap-3">
            <Link 
@@ -27,6 +28,7 @@ defineProps<{
                 :key="level.value" 
                 :href="`/categories/${category.slug}`" 
                 :data="{
+                    ...filters,
                     difficulty: level.value  
                 }"
                 class="px-4 py-2 border rounded-full text-sm font-medium transition-all shadow-sm"
@@ -37,8 +39,60 @@ defineProps<{
            >
                 {{ level.label }}
             </Link>
+        </div>
+    </section>
+    <section class="max-w-4xl mx-auto px-4 mt-2 mb-4">
+        <div class="flex flex-wrap gap-3">
+            <Link
+                :href="`/categories/${category.slug}`"
+                class="px-4 py-2 border rounded-full text-sm font-medium transition-all shadow-sm"
+                :class="{ 
+                    'border-orange-500 bg-orange-50 text-orange-600 shadow-inner': filters?.duration == 30,
+                    'bg-white border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600': filters?.duration != 30}"
+                :data="{
+                    ...filters,
+                    duration : 30,
+                    
+                }"
+                preserve-scroll
+                >
+
+                -30mns
+            </Link>
+            <Link
+                :href="`/categories/${category.slug}`"
+                class="px-4 py-2 border rounded-full text-sm font-medium transition-all shadow-sm"
+                :class="{ 
+                    'border-orange-500 bg-orange-50 text-orange-600 shadow-inner': filters?.duration == 45,
+                    'bg-white border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600': filters?.duration != 45}"
+                :data="{
+                    ...filters,
+                    duration : 45,
+                    
+                }"
+                preserve-scroll
+                >
+
+                entres 30 et 60mins
+            </Link>
+            <Link
+                :href="`/categories/${category.slug}`"
+                class="px-4 py-2 border rounded-full text-sm font-medium transition-all shadow-sm"
+                :class="{ 
+                    'border-orange-500 bg-orange-50 text-orange-600 shadow-inner': filters?.duration == 61,
+                    'bg-white border-gray-200 text-gray-700 hover:border-orange-500 hover:text-orange-600': filters?.duration != 61}"
+                :data="{
+                    ...filters,
+                    duration : 61,
+                    
+                }"
+                preserve-scroll
+                >
+
+                + 1h
+            </Link>
             <Link 
-                v-if="filters?.difficulty"
+                v-if="filters"
                 :href="`/categories/${category.slug}`"
                 class="px-4 py-2 text-sm text-gray-400"
             >
