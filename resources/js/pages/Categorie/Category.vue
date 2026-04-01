@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Pagination from '@/components/Global/Pagination.vue';
 import RecipeCard from '@/components/Global/RecipeCard.vue';
+import RecipesFilter from '@/components/Global/RecipesFilter.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
 import type { Category, Paginator } from '@/types/recipe';
-import RecipesFilter from '@/components/Global/RecipesFilter.vue';
 
 defineProps<{
     category: Category

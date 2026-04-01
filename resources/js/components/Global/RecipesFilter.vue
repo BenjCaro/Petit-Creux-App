@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { usePage } from '@inertiajs/vue3';
-import type { Category, DifficultyLevel, Duration } from '@/types/recipe';
 import { Link } from '@inertiajs/vue3';
+import type { Category, DifficultyLevel, Duration } from '@/types/recipe';
 
 
 const difficulties = usePage().props.recipe_difficulty_levels as DifficultyLevel[];
 const durations = usePage().props.recipe_duration as Duration[];
 
-const props = defineProps<{
+defineProps<{
   category: Category  
   filters: {
     difficulty: number | string | null;
