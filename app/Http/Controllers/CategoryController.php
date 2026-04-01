@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Category;
+use App\Models\Recipe;
 
 class CategoryController extends Controller
 {
@@ -29,17 +32,41 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show(Category $category)
+    public function show(Category $category, Request $request)
     {   
-        $recipes = $category->approvedRecipes()->paginate(12)->onEachSide(1);
-        $total = $category->approvedRecipes->count();
 
-       //dd($recipes);
+        $query = $category->approvedRecipes();
+
+        if($request->filled('difficulty')) {
+            $query->where('difficulty', $request->input('difficulty'));
+        }
+
+        if ($request->filled('duration')) {
+            $value = (int) $request->input('duration');
+
+            switch ($value) {
+                case 30: // short
+                    $query->where('duration', '<=', 30);
+                    break;
+
+                case 45: // medium
+                    $query->whereBetween('duration', [31, 60]);
+                    break;
+
+                case 60: // long
+                    $query->where('duration', '>', 60);
+                    break;
+            }
+        }
+
+        $recipes = $query->paginate(12)->onEachSide(1)->withQueryString();
+        
 
         return Inertia::render('Categorie/Category' , [
             'category' => $category,
             'recipes' => $recipes,
-            'total' => $total
+            'filters' => $request->only(['difficulty', 'duration']),
+            'total'    => $recipes->total()
         ]);
     }
 }

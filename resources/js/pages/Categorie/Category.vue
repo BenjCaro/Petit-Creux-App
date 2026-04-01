@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Pagination from '@/components/Global/Pagination.vue';
 import RecipeCard from '@/components/Global/RecipeCard.vue';
+import RecipesFilter from '@/components/Global/RecipesFilter.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
 import type { Category, Paginator } from '@/types/recipe';
 
@@ -8,6 +9,10 @@ defineProps<{
     category: Category
     total: number
     recipes: Paginator
+    filters: {
+    difficulty: number | string | null;
+    duration: number | null;
+    }
 }>()
 </script>
 
@@ -24,6 +29,7 @@ defineProps<{
                 </span>
             </h1>
         </div>
+        <RecipesFilter :filters="filters" :category="category"/>
         <section v-if="recipes?.data?.length > 0"  class="max-w-7xl mx-auto px-4 pb-20">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <RecipeCard 
@@ -33,10 +39,12 @@ defineProps<{
                     :category-name="category.name"
                 />       
             </div>
-            <div v-if="!category.approved_recipes" class="text-center py-20">
-                <p class="text-gray-400 font-medium text-lg">Aucune recette dans cette catégorie pour le moment 👨‍🍳</p>
-            </div>
             <Pagination :items="recipes"/>
         </section>
+        <div v-else class="text-center py-20">
+            <p class="text-gray-400 font-medium text-lg">
+                {{ filters.difficulty ? 'Aucune recette ne correspond à ce niveau de difficulté.' : 'Aucune recette dans cette catégorie pour le moment.' }}
+            </p>
+        </div>
     </MainLayout>
 </template>

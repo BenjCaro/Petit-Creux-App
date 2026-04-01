@@ -56,3 +56,8 @@ export interface DifficultyLevel {
   value: number;
   label: string;
 }
+
+export interface Duration {
+    value: number;
+    label: string;
+}
