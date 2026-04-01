@@ -2,6 +2,7 @@
 import { Link } from '@inertiajs/vue3';
 import { Clock, ChefHat } from 'lucide-vue-next';
 import type { Recipe } from '@/types/recipe';
+import { recipe as recipeRoute } from '@/routes';
 
 defineProps<{
     recipe: Recipe;
@@ -12,7 +13,7 @@ defineProps<{
 <template>
     <Link 
         :key="recipe.id"
-        :href="`/recettes/${recipe.slug}`"
+        :href=recipeRoute(recipe)
         class="group flex items-center bg-white p-4 rounded-2xl border border-gray-100 shadow-sm hover:border-orange-400 hover:shadow-lg transition-all duration-300 h-full"
     >
         <div class="w-20 h-20 bg-gray-50 rounded-xl flex-shrink-0 flex items-center justify-center text-3xl group-hover:bg-orange-50 group-hover:scale-105 transition-all duration-300">
