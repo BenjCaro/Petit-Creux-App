@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
+import { category as categoryRoute } from '@/routes';
 import type { Category} from '@/types/recipe'; 
 import RecipeCard from './RecipeCard.vue';
 
@@ -27,7 +28,7 @@ defineProps<{
                         {{ category.approved_recipes_count > 1 ? 'recettes' : 'recette' }}
                     </span>
                 </h2>
-                <Link :href="`/categories/${category.slug}`" 
+                <Link :href=categoryRoute(category) 
                       class="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg text-sm font-semibold hover:bg-emerald-100 transition-colors border border-emerald-100">
                     Voir tout →
                 </Link>
@@ -41,7 +42,7 @@ defineProps<{
                 />
             </div>
             <div class="md:hidden">
-                <Link :href="`/categories/${category.slug}`" 
+                <Link :href=categoryRoute(category) 
                       class="block p-6 bg-gray-50 rounded-2xl border border-dashed border-gray-300 text-center">
                     <p class="text-gray-600 font-medium">Découvrir les recettes "{{ category.name }}"</p>
                     <span class="text-xs text-gray-400">Appuyez pour explorer la catégorie</span>

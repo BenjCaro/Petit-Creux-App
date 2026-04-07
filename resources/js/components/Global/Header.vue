@@ -2,20 +2,21 @@
 import { Link } from '@inertiajs/vue3';
 import { Menu, X } from 'lucide-vue-next';
 import { ref } from 'vue';
+import { home, categories, login } from '@/routes';
 
 const isMenuOpen = ref(false);
 
 const linkMenu = [
-    { name: 'Catégories', url: '/categories' },
-    { name: 'A propos', url : '/about'},
-    { name: 'Connexion', url: '/login'}
+    { name: 'Toutes nos recettes', route: categories() },
+    { name: 'A propos', route : '/about'},
+    { name: 'Connexion', route: login()}
 ];
 </script>
 
 <template>
     <header class="bg-emerald-700 text-white relative shadow-md sticky top-0 z-50">
         <nav class="flex justify-between items-center p-4 max-w-7xl mx-auto">
-            <Link href="/" class="font-bold text-xl tracking-tight">
+            <Link :href=home() class="font-bold text-xl tracking-tight">
                 Petit Creux
             </Link>
             <button 
@@ -27,7 +28,7 @@ const linkMenu = [
             </button>
             <ul class="hidden md:flex gap-8 items-center font-medium">
                 <li v-for="link in linkMenu" :key="link.name">
-                    <Link :href="link.url" class="hover:text-emerald-200 transition-colors">
+                    <Link :href="link.route" class="hover:text-emerald-200 transition-colors">
                         {{ link.name }}
                     </Link>
                 </li>
@@ -45,7 +46,7 @@ const linkMenu = [
                 <ul class="flex flex-col p-6 space-y-4">
                     <li v-for="link in linkMenu" :key="link.name">
                         <Link 
-                            :href="link.url" 
+                            :href="link.route" 
                             class="text-lg font-medium block w-full py-2"
                             @click="isMenuOpen = false"
                         >
