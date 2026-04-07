@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
+import { category as categoryRoute } from '@/routes';
 import type { Category} from '@/types/recipe'; 
 import RecipeCard from './RecipeCard.vue';
-import { category as categoryRoute } from '@/routes';
 
 defineProps<{
   categories: Category[];
