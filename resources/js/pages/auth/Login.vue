@@ -94,7 +94,7 @@ defineProps<{
                     data-test="login-button"
                 >
                     <Spinner v-if="processing" />
-                    Log in
+                    Se Connecter
                 </Button>
             </div>
 
@@ -102,8 +102,8 @@ defineProps<{
                 class="text-center text-sm text-muted-foreground"
                 v-if="canRegister"
             >
-                Don't have an account?
-                <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+                Pas encore de compte?
+                <TextLink :href="register()" :tabindex="5">Inscris toi!</TextLink>
             </div>
         </Form>
     </AuthBase>
