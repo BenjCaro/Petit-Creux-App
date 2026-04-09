@@ -1,16 +1,25 @@
 <script setup lang="ts">
+import { usePage } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import { Menu, X } from 'lucide-vue-next';
-import { ref } from 'vue';
-import { home, categories, login } from '@/routes';
+import { ref, computed} from 'vue';
+import { home, categories, login, logout } from '@/routes';
+
+
 
 const isMenuOpen = ref(false);
 
-const linkMenu = [
-    { name: 'Toutes nos recettes', route: categories() },
-    { name: 'A propos', route : '/about'},
-    { name: 'Connexion', route: login()}
-];
+const linkMenu = computed(() => {
+    const auth = usePage().props.auth;
+
+    return [
+        { name: 'Toutes nos recettes', route: categories(), method: 'get' as const},
+        { name: 'A propos', route: '/about', method: 'get' as const},
+        auth.user
+            ? { name: 'Déconnexion', route: logout(), method: 'post' as const }
+            : { name: 'Connexion', route: login(), method: 'get' as const }
+    ];
+});
 </script>
 
 <template>
@@ -28,7 +37,7 @@ const linkMenu = [
             </button>
             <ul class="hidden md:flex gap-8 items-center font-medium">
                 <li v-for="link in linkMenu" :key="link.name">
-                    <Link :href="link.route" class="hover:text-emerald-200 transition-colors">
+                    <Link :href="link.route" :method="link.method" class="hover:text-emerald-200 transition-colors">
                         {{ link.name }}
                     </Link>
                 </li>
