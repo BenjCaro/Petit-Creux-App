@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import { usePage } from '@inertiajs/vue3';
 import CategoryList from '@/components/Global/CategoryList.vue';
 import SearchBar from '@/components/Global/SearchBar.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
 import type {Category, Paginator } from '@/types/recipe';
-import { computed } from 'vue';
-
-const page = usePage();
-
-const flash = computed(() => page.props.flash as { message?: string, status?: string, error?: string });
 
 defineProps<{
   title?: string,
@@ -25,9 +19,6 @@ defineProps<{
 
 <template> 
     <MainLayout>
-        <div v-if="flash">
-            {{ flash.message }}
-        </div>
         <h1 class="text-center font-bold text-4xl p-3">
             {{ title }}
         </h1>
