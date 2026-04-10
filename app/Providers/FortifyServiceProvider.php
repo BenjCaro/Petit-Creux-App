@@ -14,6 +14,7 @@ use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
+use Laravel\Fortify\Contracts\RegisterResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -34,8 +35,6 @@ class FortifyServiceProvider extends ServiceProvider
         $this->configureViews();
         $this->configureRateLimiting();
 
-
-        // Pour le Login
         $this->app->instance(LoginResponse::class, new class implements LoginResponse {
             public function toResponse($request) {
                 return redirect()->intended(config('fortify.home'))
@@ -43,10 +42,16 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
 
-        // Pour le Logout
         $this->app->instance(LogoutResponse::class, new class implements LogoutResponse {
             public function toResponse($request) {
                 return redirect('/')->with('message', 'À bientôt !');
+            }
+        });
+
+        $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
+        public function toResponse($request) {
+            return redirect(config('fortify.home'))
+                    ->with('message', 'Votre compte Petit Creux a été créé avec succès !');
             }
         });
     }

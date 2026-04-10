@@ -2,24 +2,18 @@
 import { usePage } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import { Menu, X } from 'lucide-vue-next';
-import { ref, computed} from 'vue';
-import { home, categories, login, logout } from '@/routes';
+import { ref} from 'vue';
+import { home, categories, login, logout, dashboard } from '@/routes';
 
-
+const auth = usePage().props.auth;
 
 const isMenuOpen = ref(false);
 
-const linkMenu = computed(() => {
-    const auth = usePage().props.auth;
-
-    return [
+const linkMenu = 
+     [
         { name: 'Toutes nos recettes', route: categories(), method: 'get' as const},
-        { name: 'A propos', route: '/about', method: 'get' as const},
-        auth.user
-            ? { name: 'Déconnexion', route: logout(), method: 'post' as const }
-            : { name: 'Connexion', route: login(), method: 'get' as const }
+        { name: 'A propos', route: '/about', method: 'get' as const}
     ];
-});
 </script>
 
 <template>
@@ -41,6 +35,25 @@ const linkMenu = computed(() => {
                         {{ link.name }}
                     </Link>
                 </li>
+                <template v-if="auth.user">
+                    <li>
+                        <Link :href="dashboard()" class="hover:text-emerald-200 transition-colors">
+                            Mon Compte
+                        </Link>
+                    </li>
+                    <li>
+                        <Link :href=logout() method="post" as="button" class="hover:text-emerald-200 transition-colors">
+                            Déconnexion
+                        </Link>
+                    </li>
+                </template>
+                <template v-else>
+                    <li >
+                        <Link :href=login() class="hover:text-emerald-200 transition-colors">
+                            Se Connecter
+                        </Link>
+                    </li>
+                </template>
             </ul>
         </nav>
         <Transition
@@ -62,6 +75,25 @@ const linkMenu = computed(() => {
                             {{ link.name }}
                         </Link>
                     </li>
+                    <template v-if="auth.user">
+                    <li>
+                        <Link :href="dashboard()" class="hover:text-emerald-200 transition-colors">
+                            Mon Compte
+                        </Link>
+                    </li>
+                    <li>
+                        <Link :href=logout() method="post" as="button" class="hover:text-emerald-200 transition-colors">
+                            Déconnexion
+                        </Link>
+                    </li>
+                    </template>
+                    <template v-else>
+                        <li >
+                            <Link :href=login() class="hover:text-emerald-200 transition-colors">
+                                Se Connecter
+                            </Link>
+                        </li>
+                    </template>
                 </ul>
             </div>
         </Transition>
